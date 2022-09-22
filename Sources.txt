@@ -1,0 +1,6 @@
+https://dotnettutorials.net/lesson/generic-repository-pattern-csharp-mvc/
+
+https://www.c-sharpcorner.com/UploadFile/bd5be5/design-patterns-in-net/
+
+https://www.c-sharpcorner.com/uploadfile/babu_2082/architectural-patterns-in-net/
+
