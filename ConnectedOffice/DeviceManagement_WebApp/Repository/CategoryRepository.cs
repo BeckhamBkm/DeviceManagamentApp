@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DeviceManagement_WebApp.Repository
 {
-    public class CategoryRepository : GenericRepository<Category>
+    public class CategoryRepository : GenericRepository<Category>, ICategoryRepository
     {
         private readonly ConnectedOfficeContext _context;
 
@@ -18,24 +18,24 @@ namespace DeviceManagement_WebApp.Repository
             _context = context;
         }
 
-        public IEnumerable<Category> GetCategory()
+        public IEnumerable<Category> GetCategories()
         {
             return _context.Category.ToList();
         }
 
-        public Category GetCategoryByID(int id)
+        public Category GetCategoryById(int id)
         {
             return _context.Category.Find(id);
         }
 
-        public void InsertStudent(Category category)
+        public void InsertCategory(Category category)
         {
             _context.Category.Add(category);
         }
 
-        public void DeleteStudent(int categoryID)
+        public void DeleteCategory(int categoryId)
         {
-            Category category = _context.Category.Find(categoryID);
+            Category category = _context.Category.Find(categoryId);
             _context.Category.Remove(category);
         }
 
@@ -68,7 +68,8 @@ namespace DeviceManagement_WebApp.Repository
             Dispose(true);
             GC.SuppressFinalize(this);
         }
-        }
+
+    }
     }
 
    

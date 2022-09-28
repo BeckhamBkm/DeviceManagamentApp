@@ -8,23 +8,14 @@ using System.Threading.Tasks;
 
 namespace DeviceManagement_WebApp.Repository
 {
-    public interface ICategoryRepository : IGenericRepository<Category>
+    public interface ICategoryRepository : IDisposable
     {
-        IEnumerable<Category> GetAllCategories();
-
+        IEnumerable<Category> GetCategories();
         Category GetCategoryById(int categoryId);
-        Category Find(int categoryId);
-
-        void DeleteCategoryById(int categoryId);
-
-
+        void InsertCategory(Category category);
+        void DeleteCategory(int categoryId);
         void UpdateCategory(Category category);
-
-        void AddCategory(Category category);
-
-
         void Save();
-        
+       
     }
-
 }

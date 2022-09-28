@@ -16,130 +16,118 @@ namespace DeviceManagement_WebApp.Controllers
     {
         private readonly ICategoryRepository _categoryRepository;
         
-        public CategoriesController(ICategoryRepository categoryRepository)
+        public CategoriesController(ICategoryRepository CategoryRepository)
         {
-            _categoryRepository = categoryRepository;
+            _categoryRepository = CategoryRepository;
         }
 
         // GET: Categories
         public async Task<IActionResult> Index()
         {
-            return View(_categoryRepository.GetAllCategories());
+            return View(_categoryRepository.GetCategories());
+    
         }
 
-        // GET: Categories/Details/5
-        public async Task<IActionResult> Details(int id)
+        public IActionResult Details(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
             Category category = _categoryRepository.GetCategoryById(id);
             return View(category);
-
-          
         }
+
 
         // GET: Categories/Create
         public IActionResult Create()
         {
-            return View();
+            return View(new Category());
         }
 
         // POST: Categories/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CategoryId,CategoryName,CategoryDescription,DateCreated")] Category category)
+        public IActionResult Create([Bind("CategoryId,CategoryName,CategoryDescription,DateCreated")] Category category)
         {
-            category.CategoryId = Guid.NewGuid();
-            _categoryRepository.Add(category);
-            _categoryRepository.Save();
-            return RedirectToAction(nameof(Index));
+            try
+            {
+                category.CategoryId = Guid.NewGuid();
+                _categoryRepository.InsertCategory(category);
+                _categoryRepository.Save();
+                return RedirectToAction(nameof(Index));
+
+            }
+            catch (Exception)
+            {
+                ModelState.AddModelError("", "");
+            }
+            return View(category);
+
         }
 
         // GET: Categories/Edit/5
-        public async Task<IActionResult> Edit(int categoryId)
+        public async Task<IActionResult> Edit(int id)
         {
-            if (categoryId == null)
-            {
-                return NotFound();
-            }
-
-
-            Category category = _categoryRepository.GetById(categoryId);
-            if (category == null)
-            {
-                return NotFound();
-            }
+            Category category = _categoryRepository.GetCategoryById(id);
             return View(category);
         }
-
         // POST: Categories/Edit/5
        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(Guid id, [Bind("CategoryId,DeviceId,DeviceName,ZoneId,Status,IsActive,DateCreated")] Category category)
         {
-            if (id != category.CategoryId)
-            {
-                return NotFound();
-            }
             try
             {
-                _categoryRepository.Update(category);
+                _categoryRepository.UpdateCategory(category);
                 _categoryRepository.Save();
+                return RedirectToAction(nameof(Index));
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!CategoryExists(category,id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                ModelState.AddModelError("", "");
+               
             }
-            return RedirectToAction(nameof(Index));
+            return View(category);
+ 
+            
 
         }
 
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> Delete(int id,bool?saveChangesError)
         {
-            if (id == null)
+            if (saveChangesError.GetValueOrDefault())
             {
                 return NotFound();
             }
 
             Category category = _categoryRepository.GetCategoryById(id);
-
-            if (category == null)
-            {
-                return NotFound();
-            }
-
             return View(category);
+           
         }
 
         // POST: Devices/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public IActionResult DeleteConfirmed(int id)
         {
-            var category = _categoryRepository.Find(id);
-            _categoryRepository.Remove(category);
-            _categoryRepository.Save();
+            try
+            {
+                Category category = _categoryRepository.GetCategoryById(id);
+                _categoryRepository.DeleteCategory(id);
+                _categoryRepository.Save();
+
+
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                return RedirectToActionPermanent(nameof(Index));
+            }
             return RedirectToAction(nameof(Index));
+
         }
 
         private bool CategoryExists(Category category, Guid id)
         {
-                return _categoryRepository.GetAll().Any(x => x.CategoryId == id);   
+                return _categoryRepository.GetCategories().Any(x => x.CategoryId == id);   
         }
-
    
     }
 }
