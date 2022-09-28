@@ -4,7 +4,16 @@ https://www.c-sharpcorner.com/UploadFile/bd5be5/design-patterns-in-net/
 
 https://www.c-sharpcorner.com/uploadfile/babu_2082/architectural-patterns-in-net/
 
+https://www.c-sharpcorner.com/UploadFile/3d39b4/crud-using-the-repository-pattern-in-mvc/
+
 https://learn.microsoft.com/en-us/aspnet/mvc/overview/older-versions/getting-started-with-ef-5-using-mvc-4/implementing-the-repository-and-unit-of-work-patterns-in-an-asp-net-mvc-application
 
+https://stackoverflow.com/questions/8141730/system-notimplementedexception-error
 
+https://learn.microsoft.com/en-us/dotnet/api/system.notimplementedexception?view=net-7.0
 
+https://www.stechies.com/object-reference-not-set-instance-object/#:~:text=What%20is%20%E2%80%9CNullReferenceException%3A%20Object%20reference,object%20has%20not%20been%20initialized.
+
+https://stackoverflow.com/questions/40900414/dependency-injection-error-unable-to-resolve-service-for-type-while-attempting
+
+https://dailydevsblog.com/troubleshoot/resolved-argumentexception-the-key-value-at-position-0-of-the-call-to-dbset-find-was-of-type-string-which-does-not-match-the-property-type-of-int-77392/
