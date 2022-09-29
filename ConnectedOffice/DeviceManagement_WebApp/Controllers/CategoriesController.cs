@@ -28,9 +28,8 @@ namespace DeviceManagement_WebApp.Controllers
     
         }
 
-        public IActionResult Details(int id)
+        public IActionResult Details(Category category)
         {
-            Category category = _categoryRepository.GetCategoryById(id);
             return View(category);
         }
 
@@ -63,16 +62,16 @@ namespace DeviceManagement_WebApp.Controllers
         }
 
         // GET: Categories/Edit/5
-        public async Task<IActionResult> Edit(int id)
+        public async Task<IActionResult> Edit(Guid CategoryId)
         {
-            Category category = _categoryRepository.GetCategoryById(id);
+            Category category = _categoryRepository.GetCategoryById(CategoryId);
             return View(category);
         }
         // POST: Categories/Edit/5
        
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("CategoryId,DeviceId,DeviceName,ZoneId,Status,IsActive,DateCreated")] Category category)
+        public async Task<IActionResult> Edit(Guid CategoryId, [Bind("CategoryId,DeviceId,DeviceName,ZoneId,Status,IsActive,DateCreated")] Category category)
         {
             try
             {
@@ -91,14 +90,14 @@ namespace DeviceManagement_WebApp.Controllers
 
         }
 
-        public async Task<IActionResult> Delete(int id,bool?saveChangesError)
+        public async Task<IActionResult> Delete(Guid CategoryId, bool?saveChangesError)
         {
             if (saveChangesError.GetValueOrDefault())
             {
                 return NotFound();
             }
 
-            Category category = _categoryRepository.GetCategoryById(id);
+            Category category = _categoryRepository.GetCategoryById(CategoryId);
             return View(category);
            
         }
@@ -106,12 +105,12 @@ namespace DeviceManagement_WebApp.Controllers
         // POST: Devices/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public IActionResult DeleteConfirmed(int id)
+        public IActionResult DeleteConfirmed(Guid CategoryId)
         {
             try
             {
-                Category category = _categoryRepository.GetCategoryById(id);
-                _categoryRepository.DeleteCategory(id);
+                Category category = _categoryRepository.GetCategoryById(CategoryId);
+                _categoryRepository.DeleteCategory(CategoryId);
                 _categoryRepository.Save();
 
 

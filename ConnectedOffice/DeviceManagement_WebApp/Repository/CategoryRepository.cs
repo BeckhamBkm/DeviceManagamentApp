@@ -23,9 +23,9 @@ namespace DeviceManagement_WebApp.Repository
             return _context.Category.ToList();
         }
 
-        public Category GetCategoryById(int id)
+        public Category GetCategoryById(Guid CategoryId)
         {
-            return _context.Category.Find(id);
+            return _context.Category.Find(CategoryId);
         }
 
         public void InsertCategory(Category category)
@@ -33,9 +33,9 @@ namespace DeviceManagement_WebApp.Repository
             _context.Category.Add(category);
         }
 
-        public void DeleteCategory(int categoryId)
+        public void DeleteCategory(Guid CategoryId)
         {
-            Category category = _context.Category.Find(categoryId);
+            Category category = _context.Category.Find(CategoryId);
             _context.Category.Remove(category);
         }
 

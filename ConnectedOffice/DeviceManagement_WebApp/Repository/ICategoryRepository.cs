@@ -11,9 +11,9 @@ namespace DeviceManagement_WebApp.Repository
     public interface ICategoryRepository : IDisposable
     {
         IEnumerable<Category> GetCategories();
-        Category GetCategoryById(int categoryId);
+        Category GetCategoryById(Guid categoryId);
         void InsertCategory(Category category);
-        void DeleteCategory(int categoryId);
+        void DeleteCategory(Guid categoryId);
         void UpdateCategory(Category category);
         void Save();
        
