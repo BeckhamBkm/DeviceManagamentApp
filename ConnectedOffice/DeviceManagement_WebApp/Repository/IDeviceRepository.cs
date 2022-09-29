@@ -7,9 +7,9 @@ namespace DeviceManagement_WebApp.Repository
     public interface IDeviceRepository : IDisposable
     {
         IEnumerable<Device> GetDevices();
-        Device GetDeviceById(int deviceId);
+        Device GetDeviceById(Guid DeviceId);
         void InsertDevice(Device device);
-        void DeleteDevice(int deviceId);
+        void DeleteDevice(Guid DeviceId);
         void UpdateDevice(Device device);
         void Save();
 

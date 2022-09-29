@@ -27,11 +27,8 @@ namespace DeviceManagement_WebApp.Controllers
         }
 
         // GET: Zones/Details/5
-        public async Task<IActionResult> Details(int id)
+        public async Task<IActionResult> Details(Zone zone)
         {
-            Zone zone = _zoneRepository.GetZoneById(id);
-
-
             return View(zone);
         }
 
@@ -64,9 +61,9 @@ namespace DeviceManagement_WebApp.Controllers
         }
 
         // GET: Zones/Edit/5
-        public async Task<IActionResult> Edit(int id)
+        public async Task<IActionResult> Edit(Guid ZoneId)
         {
-            Zone zone = _zoneRepository.GetZoneById(id);
+            Zone zone = _zoneRepository.GetZoneById(ZoneId);
 
             return View(zone);
         }
@@ -76,7 +73,7 @@ namespace DeviceManagement_WebApp.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("ZoneId,ZoneName,ZoneDescription,DateCreated")] Zone zone)
+        public async Task<IActionResult> Edit(Guid ZoneId, [Bind("ZoneId,ZoneName,ZoneDescription,DateCreated")] Zone zone)
         {
             try
             {
@@ -94,41 +91,41 @@ namespace DeviceManagement_WebApp.Controllers
         }
 
             // GET: Zones/Delete/5
-            public async Task<IActionResult> Delete(int id, bool? saveChangesError)
+            public async Task<IActionResult> Delete(Guid ZoneId, bool? saveChangesError)
             {
                 if (saveChangesError.GetValueOrDefault())
                 {
                     return NotFound();
                 }
 
-                Zone zone = _zoneRepository.GetZoneById(id);
+                Zone zone = _zoneRepository.GetZoneById(ZoneId);
                 return View(zone);
             }
 
         // POST: Zones/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public IActionResult DeleteConfirmed(int id)
+        public IActionResult DeleteConfirmed(Guid ZoneId)
         {
             try
             {
-                Zone zone = _zoneRepository.GetZoneById(id);
-                _zoneRepository.DeleteZone(id);
+                Zone zone = _zoneRepository.GetZoneById(ZoneId);
+                _zoneRepository.DeleteZone(ZoneId);
                 _zoneRepository.Save();
 
 
             }
             catch (DbUpdateConcurrencyException)
             {
-                return NotFound(id);
+                return NotFound(ZoneId);
             }
             return RedirectToAction(nameof(Index));
         }
 
 
-        private bool ZoneExists(Guid id, Zone zone)
+        private bool ZoneExists(Guid ZoneId, Zone zone)
             {
-                return _zoneRepository.GetZones().Any(e => e.ZoneId == id);
+                return _zoneRepository.GetZones().Any(e => e.ZoneId == ZoneId);
             }
         }
 

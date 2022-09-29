@@ -11,9 +11,9 @@ namespace DeviceManagement_WebApp.Repository
     public interface IZoneRepository : IDisposable
     {
         IEnumerable<Zone> GetZones();
-        Zone GetZoneById(int zoneId);
+        Zone GetZoneById(Guid ZoneId);
         void InsertZone(Zone zone);
-        void DeleteZone(int zoneId);
+        void DeleteZone(Guid ZoneId);
         void UpdateZone(Zone zone);
         void Save();
     }

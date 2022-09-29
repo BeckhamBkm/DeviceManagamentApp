@@ -28,9 +28,8 @@ namespace DeviceManagement_WebApp.Controllers
 
         }
 
-        public IActionResult Details(int id)
+        public IActionResult Details(Device device)
         {
-            Device device = _deviceRepository.GetDeviceById(id);
             return View(device);
         }
 
@@ -63,9 +62,9 @@ namespace DeviceManagement_WebApp.Controllers
         }
 
         // GET: Devices/Edit/5
-        public async Task<IActionResult> Edit(int id)
+        public async Task<IActionResult> Edit(Guid DeviceId)
         {
-                Device device = _deviceRepository.GetDeviceById(id);
+                Device device = _deviceRepository.GetDeviceById(DeviceId);
             return View(device);
         }
         // POST: Devices/Edit/5
@@ -91,14 +90,14 @@ namespace DeviceManagement_WebApp.Controllers
 
         }
 
-        public async Task<IActionResult> Delete(int id, bool? saveChangesError)
+        public async Task<IActionResult> Delete(Guid DeviceId, bool? saveChangesError)
         {
             if (saveChangesError.GetValueOrDefault())
             {
                 return NotFound();
             }
 
-            Device device = _deviceRepository.GetDeviceById(id);
+            Device device = _deviceRepository.GetDeviceById(DeviceId);
             return View(device);
 
         }
@@ -106,12 +105,12 @@ namespace DeviceManagement_WebApp.Controllers
         // POST: Devices/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(Guid DeviceId)
         {
             try
             {
-                Device device = _deviceRepository.GetDeviceById(id);
-                _deviceRepository.DeleteDevice(id);
+                Device device = _deviceRepository.GetDeviceById(DeviceId);
+                _deviceRepository.DeleteDevice(DeviceId);
                 _deviceRepository.Save();
 
 

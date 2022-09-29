@@ -26,9 +26,9 @@ namespace DeviceManagement_WebApp.Repository
             return _context.Device.ToList();
         }
 
-        public Device GetDeviceId(int id)
+        public Device GetDeviceById(Guid DeviceId)
         {
-            return _context.Device.Find(id);
+            return _context.Device.Find(DeviceId);
         }
 
         public void InsertDevice(Device device)
@@ -36,9 +36,9 @@ namespace DeviceManagement_WebApp.Repository
             _context.Device.Add(device);
         }
 
-        public void DeleteDevice(int deviceId)
+        public void DeleteDevice(Guid DeviceId)
         {
-            Device device = _context.Device.Find(deviceId);
+            Device device = _context.Device.Find(DeviceId);
             _context.Device.Remove(device);
         }
 
@@ -72,9 +72,6 @@ namespace DeviceManagement_WebApp.Repository
             GC.SuppressFinalize(this);
         }
 
-        public Device GetDeviceById(int deviceId)
-        {
-            throw new NotImplementedException();
-        }
+        
     }
 }

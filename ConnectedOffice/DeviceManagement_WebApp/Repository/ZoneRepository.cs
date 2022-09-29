@@ -20,9 +20,9 @@ namespace DeviceManagement_WebApp.Repository
             return _context.Zone.ToList();
         }
 
-        public Zone GetZoneById(int id)
+        public Zone GetZoneById(Guid ZoneId)
         {
-            return _context.Zone.Find(id);
+            return _context.Zone.Find(ZoneId);
         }
 
         public void InsertZone(Zone zone)
@@ -30,9 +30,9 @@ namespace DeviceManagement_WebApp.Repository
             _context.Zone.Add(zone);
         }
 
-        public void DeleteZone(int zoneId)
+        public void DeleteZone(Guid ZoneId)
         {
-            Zone zone = _context.Zone.Find(zoneId);
+            Zone zone = _context.Zone.Find(ZoneId);
             _context.Zone.Remove(zone);
         }
 
