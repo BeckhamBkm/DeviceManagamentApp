@@ -27,8 +27,9 @@ namespace DeviceManagement_WebApp.Controllers
         }
 
         // GET: Zones/Details/5
-        public async Task<IActionResult> Details(Zone zone)
+        public async Task<IActionResult> Details(Guid guid)
         {
+            Zone zone = _zoneRepository.GetZoneById(guid);
             return View(zone);
         }
 

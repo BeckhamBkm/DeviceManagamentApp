@@ -28,8 +28,9 @@ namespace DeviceManagement_WebApp.Controllers
     
         }
 
-        public IActionResult Details(Category category)
+        public IActionResult Details(Guid CategoryId)
         {
+            Category category = _categoryRepository.GetCategoryById(CategoryId);
             return View(category);
         }
 

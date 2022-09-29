@@ -28,7 +28,7 @@ namespace DeviceManagement_WebApp.Repository
 
         public Device GetDeviceById(Guid DeviceId)
         {
-            return _context.Device.Find(DeviceId);
+            return _context.Device.FirstOrDefault(Device => DeviceId  == DeviceId);
         }
 
         public void InsertDevice(Device device)
@@ -38,9 +38,10 @@ namespace DeviceManagement_WebApp.Repository
 
         public void DeleteDevice(Guid DeviceId)
         {
-            Device device = _context.Device.Find(DeviceId);
-            _context.Device.Remove(device);
+            Device device = _context.Device.FirstOrDefault(Device => DeviceId == DeviceId);
         }
+       
+        
 
         public void UpdateDevice(Device device)
         {

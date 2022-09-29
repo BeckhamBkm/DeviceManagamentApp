@@ -22,7 +22,7 @@ namespace DeviceManagement_WebApp.Repository
 
         public Zone GetZoneById(Guid ZoneId)
         {
-            return _context.Zone.Find(ZoneId);
+            return _context.Zone.FirstOrDefault(Zone => ZoneId == ZoneId);
         }
 
         public void InsertZone(Zone zone)
@@ -32,9 +32,10 @@ namespace DeviceManagement_WebApp.Repository
 
         public void DeleteZone(Guid ZoneId)
         {
-            Zone zone = _context.Zone.Find(ZoneId);
-            _context.Zone.Remove(zone);
+            Zone zone = _context.Zone.FirstOrDefault(Zone => ZoneId == ZoneId);
         }
+        
+        
 
         public void UpdateZone(Zone zone)
         {

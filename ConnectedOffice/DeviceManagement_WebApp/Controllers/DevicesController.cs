@@ -28,8 +28,9 @@ namespace DeviceManagement_WebApp.Controllers
 
         }
 
-        public IActionResult Details(Device device)
+        public IActionResult Details(Guid DeviceId)
         {
+            Device device = _deviceRepository.GetDeviceById(DeviceId);
             return View(device);
         }
 
@@ -37,7 +38,7 @@ namespace DeviceManagement_WebApp.Controllers
         // GET: Devices/Create
         public IActionResult Create()
         {
-            return View(new Category());
+            return View(new Device());
         }
 
         // POST: Devices/Create

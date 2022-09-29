@@ -25,7 +25,8 @@ namespace DeviceManagement_WebApp.Repository
 
         public Category GetCategoryById(Guid CategoryId)
         {
-            return _context.Category.Find(CategoryId);
+            return _context.Category.FirstOrDefault(Category => CategoryId == CategoryId);
+            
         }
 
         public void InsertCategory(Category category)
@@ -35,7 +36,7 @@ namespace DeviceManagement_WebApp.Repository
 
         public void DeleteCategory(Guid CategoryId)
         {
-            Category category = _context.Category.Find(CategoryId);
+            Category category = _context.Category.FirstOrDefault(_ => CategoryId == CategoryId);
             _context.Category.Remove(category);
         }
 
