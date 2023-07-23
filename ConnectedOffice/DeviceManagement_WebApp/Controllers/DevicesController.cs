@@ -20,108 +20,98 @@ namespace DeviceManagement_WebApp.Controllers
             _deviceRepository = DeviceRepository;
         }
 
-        // GET: Devices
-        // GET: Categories
-        public async Task<IActionResult> Index()
+       // GET: Device
+        public IActionResult Index()
         {
-            return View(_deviceRepository.GetDevices());
-
+            IEnumerable<Device> devices = _deviceRepository.GetDevices();
+            return View(devices);
         }
 
-        public IActionResult Details(Guid DeviceId)
+        // GET: Device/Details/5
+        public IActionResult Details(Guid id)
         {
-            Device device = _deviceRepository.GetDeviceById(DeviceId);
+            Device device = _deviceRepository.GetDeviceById(id);
+            if (device == null)
+            {
+                return NotFound();
+            }
             return View(device);
         }
 
-
-        // GET: Devices/Create
+        // GET: Device/Create
         public IActionResult Create()
         {
-            return View(new Device());
+            return View();
         }
 
-        // POST: Devices/Create
+        // POST: Device/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("CategoryId,CategoryName,CategoryDescription,DateCreated")] Device device)
+        public IActionResult Create(Device device)
         {
-            try
+            if (ModelState.IsValid)
             {
-                device.DeviceId = Guid.NewGuid();
                 _deviceRepository.InsertDevice(device);
                 _deviceRepository.Save();
                 return RedirectToAction(nameof(Index));
-
-            }
-            catch (Exception)
-            {
-                ModelState.AddModelError("", "");
             }
             return View(device);
-
         }
 
-        // GET: Devices/Edit/5
-        public async Task<IActionResult> Edit(Guid DeviceId)
+       // GET: Device/Edit/5
+        public IActionResult Edit(Guid id)
         {
-                Device device = _deviceRepository.GetDeviceById(DeviceId);
+            Device device = _deviceRepository.GetDeviceById(id);
+            if (device == null)
+            {
+                return NotFound();
+            }
             return View(device);
         }
-        // POST: Devices/Edit/5
 
+        // POST: Device/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("CategoryId,DeviceId,DeviceName,ZoneId,Status,IsActive,DateCreated")] Device device)
+        public IActionResult Edit(Guid id, Device device)
         {
-            try
+            if (id != device.DeviceId)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
             {
                 _deviceRepository.UpdateDevice(device);
                 _deviceRepository.Save();
                 return RedirectToAction(nameof(Index));
             }
-            catch (DbUpdateConcurrencyException)
-            {
-                ModelState.AddModelError("", "");
-
-            }
             return View(device);
-
-
-
         }
 
-        public async Task<IActionResult> Delete(Guid DeviceId, bool? saveChangesError)
+
+       // GET: Device/Delete/5
+        public IActionResult Delete(Guid id)
         {
-            if (saveChangesError.GetValueOrDefault())
+            Device device = _deviceRepository.GetDeviceById(id);
+            if (device == null)
             {
                 return NotFound();
             }
-
-            Device device = _deviceRepository.GetDeviceById(DeviceId);
             return View(device);
-
         }
 
-        // POST: Devices/Delete/5
+        // POST: Device/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(Guid DeviceId)
+        public IActionResult DeleteConfirmed(Guid id)
         {
-            try
+            Device device = _deviceRepository.GetDeviceById(id);
+            if (device != null)
             {
-                Device device = _deviceRepository.GetDeviceById(DeviceId);
-                _deviceRepository.DeleteDevice(DeviceId);
+                _deviceRepository.DeleteDevice(id);
                 _deviceRepository.Save();
-
-
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                return RedirectToActionPermanent(nameof(Index));
             }
             return RedirectToAction(nameof(Index));
-
         }
 
         private bool CategoryExists(Device device, Guid id)
