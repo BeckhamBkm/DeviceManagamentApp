@@ -24,15 +24,13 @@ Clone the repository:
 
 bash
 Copy code
-git clone https://github.com/your-username/device-management-webapp.git
+git clone [https://github.com/your-username/device-management-webapp.git](https://github.com/BeckhamBkm/DeviceManagamentApp.git)
 Build and run the application using Visual Studio or the .NET CLI:
 
-arduino
-Copy code
 cd device-management-webapp
 dotnet build
 dotnet run
-Access the web application in your browser at http://localhost:7000 (or the appropriate URL based on your settings).
+Access the web application in your browser at http://localhost:****.
 
 Configuration
 Database Connection: Configure the database connection string in the appsettings.json file to connect to your Microsoft SQL Server.
@@ -50,7 +48,5 @@ Please read our Contribution Guidelines for more details on how to contribute.
 License
 The Device Management Web Application is open-source and available under the MIT License.
 
-Contact
-If you have any questions or need further assistance, please feel free to contact us at support@example.com.
 
-Thank you for using the Device Management Web Application! We hope you find it useful for managing your devices, categories, and zones. If you have any feedback or suggestions, we'd love to hear from you. Enjoy!
+Thank you for using the Device Management Web Application! We hope you find it useful for managing your devices, categories, and zones. If you have any feedback or suggestions, I'd love to hear from you. 
