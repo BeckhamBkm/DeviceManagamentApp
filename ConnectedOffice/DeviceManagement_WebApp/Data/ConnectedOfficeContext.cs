@@ -26,7 +26,7 @@ namespace DeviceManagement_WebApp.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionBuilder)
         {
-            optionBuilder.UseSqlServer("Password=s3cur3p@ssw0rd;Persist Security Info=True;User ID=cmpg323_sa;Initial Catalog=ConnectedOffice;Data Source=zaazrcmpg323sqlserver.database.windows.net");
+            optionBuilder.UseSqlServer("DeffaultConnection");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
